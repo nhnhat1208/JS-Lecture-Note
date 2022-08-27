@@ -686,5 +686,176 @@ myCalculator(5, 5, myDisplayer);
 <br>
 
 ---
+### **JSON - JS Object Notation** 
+**Encode:** Stringify
+```js
+console.log(JSON.stringify({name: 'Ezi'}))
+// Return string JSON {"name": "Ezi"}'
+```
 
+**Decode:** Parse
+```js
+let json = '{"name": "Ezi"}';
+console.log(JSON.parse(json)); // Return object
+```
 
+<br>
+
+---
+### **SYNC - ASYNC - PROMISE - FETCH**
+**Async function :** 
+- setTimeout 
+- setInterval 
+- fetch 
+- XMLHttpRequest 
+- fs.readFile.  
+
+**Note:** Use callback function in async function to detect it.
+
+<br>
+
+#### ***Promise*** 
+**Problem: Callback hell** (Pyramid of Doom)
+- Functions **whose data is constrained** together in order.
+```js
+setTimeout(() => {
+    console.log(1);
+    setTimeout(() => {
+        console.log(2);
+        setTimeout(() => {
+            console.log(3);
+            setTimeout(() => {
+                console.log(4);
+                setTimeout(() => {
+                    console.log(5);
+                }, 3000);
+            }, 3000);
+        }, 3000);
+    }, 3000);
+}, 3000);
+// => Callback Hell (Pyramid of Doom)
+```
+
+#### ***Promise ES6 :***  
+
+<br>
+
+```js
+// State of promise : 
+// 1. Pending  (leak of memory)
+// 2. Fulfilled -> Done
+// 3. Rejected -> Fail
+
+let promise = new Promise() {
+    // Executor
+    function(resolve, reject) {
+        // Logic 
+        // Success -> resolve()
+        let result = '';
+        resolve(result);
+
+        // Fail, Err -> reject()
+        let error = '';
+        resolve(error);
+    }
+};
+
+promise
+    .then(function(result) {
+        console.log(result);
+    })
+    .catch(function(error) {
+        console.log(error);
+    })
+    .finally(function() {
+        console.log('done');
+    })
+```  
+#### **Promise chain:** 
+```js
+
+// State of promise : 
+// 1. Pending  (leak of memory)
+// 2. Fulfilled -> Done
+// 3. Rejected -> Fail
+
+let promise = new Promise() {
+    // Executor
+    function(resolve, reject) {
+        let result = '';
+        resolve(result);
+
+        let error = '';
+        resolve(error);
+    }
+};
+
+promise
+    .then(function(result) {
+        console.log(result);
+    })
+    .then(function(data) {
+        console.log(data);
+    })
+    .catch(function(error) {
+        console.log(error);
+    })
+    .finally(function(){
+        console.log('done');
+    })
+```  
+
+- **Note:** If returned data in first then code block:
+    - If it is **diff from the promise**, it's **pass returned data** to the next then code block.
+    - If it **is promise**, it's pass **resolved data** to the next then code block.
+
+```js
+function sleep(ms){
+    return new Promise(function(resolve) {
+        setTimeout(resolve, ms);
+    })
+}
+
+sleep(1000)
+    .then(function() {
+        console.log(1);
+        return sleep(1000);
+    });
+    .then(function()) {
+        // Logic code
+    }
+```
+
+<br>
+
+#### **Promise.resolve, promise.reject, promise.all**
+- **Promise.resolve :** always success.
+- **Promise.reject :** always reject.
+- **Promise.all :** parallel promises in arguments.
+```js
+Promise.all([promise1, promise2])
+    .then(function(result)) {
+        return result[0].concat(result[1]);
+    }
+```
+
+### **Fetch**
+<br>
+
+```js
+let options = {
+    method: 'POST',
+    headers: {
+        'Content-type': 'application/json'
+    },
+    body: JSON.stringify('[1, 2, 3]')
+};
+
+// Stream
+fetch('api.com.vn', options)
+    .then(response => response.json)
+    .then(json => {
+        console.log('json');
+    })
+    .catch(error => console.log(error))
+```
