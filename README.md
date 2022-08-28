@@ -859,3 +859,164 @@ fetch('api.com.vn', options)
     })
     .catch(error => console.log(error))
 ```
+
+<br>
+
+---
+
+### **JS Class**
+```js
+class Student extends Person{
+    constructor(name, age) {
+        super();
+        this.name = name;
+        this.age = age
+    }
+
+    getName(){
+        return this.name;
+    }
+
+    setName(){
+        return this.age;
+    }
+    
+    check(){
+        let isSuccess = false;
+    }
+}
+```
+
+<br>
+
+---
+### **JS Enhanced Object Literals**
+```js
+// 1. Key: value definition
+// 2. Method definition
+// 3. Key definition
+
+let name = 'JS';
+let fieldPrice = 'price';
+let course = {
+    name, // Key: value definition
+    [fieldPrice] : 3000, // Key definition
+    
+    // Method definition
+    getName() { 
+        return name;
+    }
+}
+```
+
+<br>
+
+### **Destructuring, Rest**
+```js
+let persons = ['Andy', 'Kain', 'Bin', 'Rara'];
+
+// Destructuring array
+let [person1, person2] = persons; 
+// person1: Andy, person2: Kain
+
+// Destructuring array with rest
+let [person1, ...rest] = persons;
+// person1: 'Andy', rest: ['Kain', 'Bin', 'Rara']
+
+//------------------
+let course = {
+    name: 'JS',
+    price: 1000,
+    image: 'image-address'
+    version: {
+        name: 'JS ES6'
+    }
+}
+
+// Destructuring object
+let {price, duration} = course;
+// price: 1000, duration: undefine
+
+// Get duplicate 
+let {name: parentName, version: {name: childrenName}} = course;
+// parentName: 'JS', childrenName: 'JS ES6'
+
+// Default value
+let {image, url = 4000} = course;
+// image: 'image-address', url: 4000;
+
+// Destructuring rest
+let {image, ...newObj} = course;
+// image: 'image-address
+// newObj: { 
+//      name: 'JS', 
+//      price: 1000,
+//      version: {
+//         name: 'JS ES6'
+//     }
+// }
+```
+
+<br>
+
+### **Rest Operator**
+```js
+let logger = (...params) => console.log(params);
+// params: []
+```
+
+<br>
+
+### **Spread Operator**
+- Spread (...) use to remove patternless.
+```js
+// Spread in Array
+let arr1 = [1, 2];
+let arr2 = [3, 4];
+let arr3 = [...arr1, ...arr2];
+// [1, 2, 3, 4]
+
+let object1 = {
+    name: 'JS'
+};
+
+let object2 = {
+    duration: 30
+}
+
+// Spread in object
+let object3 = {
+    ...object1,
+    ...object2
+}
+```
+***Note :***
+
+```js
+let defaultConfig = {
+    api: 'a.com.vn',
+    version: 'v1',
+    other: 'other'
+}
+
+let exerciseConfig = {
+    ...defaultConfig,
+    api: 'b.com.vn' // Override
+}
+```
+
+### ***Spread vs Rest***
+```js
+function logger(...rest) { // => args is rest
+    console.log(rest);
+}
+let arr = [1, 2];
+logger(...arr); // => spread
+```
+
+<br>
+
+---
+### Tagged template literal
+### Modules
+###     
